@@ -59,6 +59,12 @@ public class TaskServiceImpl implements TaskService {
 
             int max = res.size();
             int current = searchTaskForm.getCurrent();
+            /*
+                表示不做分页处理
+             */
+            if(current==-1){
+                return ResponseVO.buildSuccess(new TaskVOPage(max, res));
+            }
             List<Task> new_res = new ArrayList<>();
             if(max!=0){
                 int fromindex = current * 10;
