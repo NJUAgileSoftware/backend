@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bolingcavalry.mavendockerplugindemo.Dao.TaskMapper">
+    <insert id="addTask" parameterType="com.bolingcavalry.mavendockerplugindemo.PO.Task" useGeneratedKeys="true" keyProperty="id">
+        insert into task(id,name,level,state,workload,description,startTime)
+        value (#{id},#{name},#{level},#{state},#{workload},#{description},#{startTime})
+    </insert>
+
+    <select id="getAllTasks" resultMap="Task">
+        select * from task
+    </select>
+
+    <select id="getTaskByState" resultMap="Task">
+        select * from task where state=#{state};
+    </select>
+
+
+    <select id="getTaskInfoById" resultMap="Task">
+        select * from task where id=#{id}
+    </select>
+
+    <delete id="deleteTaskById">
+        delete from task where id=#{id}
+    </delete>
+
+    <update id="updateTaskState">
+        update task set state=#{state} where id=#{id}
+    </update>
+
+    <resultMap id="Task" type="com.bolingcavalry.mavendockerplugindemo.PO.Task">
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="level" property="level"></result>
+        <result column="state" property="state"></result>
+        <result column="workload" property="workload"></result>
+        <result column="description" property="description"></result>
+        <result column="startTime" property="startTime"></result>
+        <result column="endTime" property="endTime"></result>
+    </resultMap>
+</mapper>
